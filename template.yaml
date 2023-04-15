@@ -14,3 +14,5 @@ Resources:
             Queue: !Ref notification.fifo
       Environment:
         Variables:
+  notification.fifo:
+    Type: AWS::SQS::Queue
