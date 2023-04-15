@@ -1,1 +1,16 @@
-
+Resources:
+  sendemail:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./
+      Timeout: 10
+      MemorySize: 128
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !Ref notification.fifo
+      Environment:
+        Variables:
