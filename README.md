@@ -7,17 +7,22 @@ Implementing lambda functions
 ├── Makefile
 ├── bin
 ├── cmd
-│   ├── function1
+│   ├── sendemail
 │   │   └── main.go
-│   └── function2
+│   └── whatsapp
 │       └── main.go
 ├── pkg
 │   ├── config
+│   │   └── config.go
 │   ├── db
+│   │   └── postgres.go
 │   └── logging
+│       └── logging.go
 ├── template.yaml
 └── test
-    ├── function1
-    └── function2
+    ├── sendemail
+    │   └── sendemail_test.go
+    └── whatsapp
+        └── whatsapp_test.go
 
 ```
