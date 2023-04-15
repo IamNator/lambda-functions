@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Resources:
-  MyFunction:
+  WhatsappFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./bin/whatsapp
@@ -19,3 +19,25 @@ Resources:
           Properties:
             Path: /whatsapp
             Method: post
+            
+  EmailFunction:
+  Type: AWS::Serverless::Function
+  Properties:
+    CodeUri: ./bin/email
+    Handler: main
+    Runtime: go1.x
+    Timeout: 30
+    Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/lambda-execution-role"
+    Environment:
+      Variables:
+        ENVIRONMENT: production
+        DD_API_KEY: <your Datadog API key>
+        DD_SITE: datadoghq.com
+        DD_LOGS_INJECTION: "true"
+    Events:
+      MyEvent:
+        Type: Api
+        Properties:
+          Path: /email
+          Method: post
+
