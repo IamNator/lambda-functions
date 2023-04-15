@@ -1,18 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
 Resources:
-  sendemail:
+  MyFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: ./bin/whatsapp
       Handler: main
       Runtime: go1.x
-      CodeUri: ./
-      Timeout: 10
-      MemorySize: 128
-      Events:
-        MySQSEvent:
-          Type: SQS
-          Properties:
-            Queue: !Ref notification.fifo
+      Timeout: 30
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/lambda-execution-role"
       Environment:
         Variables:
-  notification.fifo:
-    Type: AWS::SQS::Queue
+          ENVIRONMENT: production
+      Events:
+        MyEvent:
+          Type: Api
+          Properties:
+            Path: /whatsapp
+            Method: post
