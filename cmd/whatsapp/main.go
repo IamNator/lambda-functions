@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"context"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -15,23 +16,17 @@ import (
 
 
 
-func sendWhatsappMessage() error {
-
-	return nil
-}
-
-
 type WhatsappMessage struct {
 }
 
 
-func handleRequest(msg WhatsappMessage) error {
+func handler(_ context.Context, msg WhatsappMessage) error {
 
 	// ...
-	return sendWhatsappMessage()
+	return nil
 }
 
 
 func main() {
-	lambda.Start(handleRequest)
+	lambda.Start(handler)
 }
